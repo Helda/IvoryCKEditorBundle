@@ -307,6 +307,16 @@ class CKEditorInstaller
         if (!@copy($from, $to)) {
             throw $this->createException(sprintf('Unable to extract the file "%s" to "%s".', $file, $to));
         }
+
+        $dir = __DIR__ . "/../Resources/public/plugins/";
+
+        if (is_dir($dir)) {
+            $zip = new \ZipArchive();
+            if ($zip->open(__DIR__ . "/../Addons/imageUpload.zip") === true) {
+                $zip->extractTo($dir);
+                $zip->close();
+            }
+        }
     }
 
     /**
